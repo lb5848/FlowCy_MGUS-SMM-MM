@@ -65,7 +65,7 @@ eta <- n_cells/exaggeration_factor
 #              distMethod = "euclidean",
 #              PCA = TRUE, eta = eta, exaggeration_factor = 12.0)
 sce <- runDR(sce, dr =  "UMAP", cells = n_cells, features = "type")
-# sce <- runDR(sce, dr = "DiffusionMap", cells = n_cells, features = "type", assay = "exprs")
+sce <- runDR(sce, dr = "DiffusionMap", cells = n_cells, features = "type", assay = "exprs")
 
 saveRDS(sce, file = "SCE_BMvsPB_DR.rds")
 
@@ -93,6 +93,10 @@ plotExprHeatmap(sce, features = type_markers(sce), k = "meta6", by = "cluster_id
 plotAbundances(sce, k = "meta6", by = "cluster_id", group_by = "condition")
 
 CATALYST::plotDR(sce, dr = "UMAP", color_by = "meta12", facet_by = "condition")
+
+CATALYST::plotDR(sce, dr = "DiffusionMap", color_by = "meta4", facet_by = "condition")
+
+
 CATALYST::plotDR(sce, dr = "UMAP", color_by = c("CD127", "CD69"), facet_by = "condition")
 plotDR(sce, dr = "UMAP", color_by = "meta12", facet_by = "condition") +  
   geom_density2d(binwidth = 0.006, colour = "black")
